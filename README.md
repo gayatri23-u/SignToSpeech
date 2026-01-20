@@ -41,6 +41,7 @@ The project works completely offline and performs all processing on the device w
 - Camera working correctly
 - Black screen issue resolved
 - Live image frames processed correctly
+- Stable finger counting implemented using convexity defects
 
 Future enhancements include gesture recognition, finger counting, and machine learning based sign classification.
 
