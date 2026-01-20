@@ -9,6 +9,7 @@ The application helps bridge the communication gap by translating sign language 
 
 The application uses the smartphone camera to capture live video frames and processes them using OpenCV.
 Hand gestures are detected and analyzed, converted into meaningful text, and then spoken using Android TextToSpeech.
+This project uses a custom getsure-based sign language designed for demonstration and learning purpose.
 
 The project works completely offline and performs all processing on the device without using any backend server.
 
