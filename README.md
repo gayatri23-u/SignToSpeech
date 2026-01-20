@@ -1,4 +1,4 @@
-# SignToSpeech
+# SignToSpeech Android Application
 
 SignToSpeech is an Android application designed to convert hand signs into text and speech using computer vision techniques.
 The application helps bridge the communication gap by translating sign language gestures into understandable output.
@@ -21,6 +21,7 @@ The project works completely offline and performs all processing on the device w
 - Conversion of detected signs into text
 - Text to Speech audio output
 - Offline functionality
+- Stable finger counting using convexity defects
 
 ---
 
