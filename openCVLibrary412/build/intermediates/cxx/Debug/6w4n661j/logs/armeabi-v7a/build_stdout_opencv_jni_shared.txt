@@ -1,0 +1,2 @@
+ninja: Entering directory `C:\Users\gayat\AndroidStudioProjects\SignToSpeech2\openCVLibrary412\.cxx\Debug\6w4n661j\armeabi-v7a'
+ninja: no work to do.

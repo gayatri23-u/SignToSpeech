@@ -1,0 +1,17 @@
+{
+  "installationFolder": "C:\\Users\\gayat\\AndroidStudioProjects\\SignToSpeech2\\openCVLibrary412\\build\\intermediates\\prefab_package\\debug\\prefab",
+  "gradlePath": ":openCVLibrary412",
+  "packageInfo": {
+    "packageName": "openCVLibrary412",
+    "packageSchemaVersion": 2,
+    "packageDependencies": [],
+    "modules": [
+      {
+        "moduleName": "opencv_jni_shared",
+        "moduleHeaders": "C:\\Users\\gayat\\AndroidStudioProjects\\SignToSpeech2\\openCVLibrary412\\native\\jni\\include",
+        "moduleExportLibraries": [],
+        "abis": []
+      }
+    ]
+  }
+}
