@@ -7,6 +7,19 @@ import android.view.SurfaceView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
+
+import org.opencv.imgproc.Imgproc;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +30,7 @@ import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 
 public class MainActivity extends AppCompatActivity
         implements CameraBridgeViewBase.CvCameraViewListener2 {
@@ -110,6 +124,57 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        return inputFrame.rgba(); // LIVE CAMERA FEED
+
+        Mat frame = inputFrame.rgba();
+        Mat rgb = new Mat();
+        Mat hsv = new Mat();
+        Mat mask = new Mat();
+
+        Imgproc.cvtColor(frame, rgb, Imgproc.COLOR_RGBA2RGB);
+        Imgproc.cvtColor(rgb, hsv, Imgproc.COLOR_RGB2HSV);
+
+        Scalar lowerSkin = new Scalar(0, 30, 60);
+        Scalar upperSkin = new Scalar(20, 150, 255);
+
+        Core.inRange(hsv, lowerSkin, upperSkin, mask);
+        Imgproc.GaussianBlur(mask, mask, new Size(5, 5), 0);
+
+        List<MatOfPoint> contours = new ArrayList<>();
+        Mat hierarchy = new Mat();
+
+        Imgproc.findContours(
+                mask,
+                contours,
+                hierarchy,
+                Imgproc.RETR_EXTERNAL,
+                Imgproc.CHAIN_APPROX_SIMPLE
+        );
+
+        double maxArea = 0;
+        MatOfPoint handContour = null;
+
+        for (MatOfPoint contour : contours) {
+            double area = Imgproc.contourArea(contour);
+            if (area > maxArea) {
+                maxArea = area;
+                handContour = contour;
+            }
+        }
+
+        if (handContour != null) {
+            Rect boundingRect = Imgproc.boundingRect(handContour);
+
+            Imgproc.rectangle(
+                    frame,
+                    boundingRect.tl(),
+                    boundingRect.br(),
+                    new Scalar(0, 255, 0),
+                    2
+            );
+        }
+
+        return frame;
     }
+
+
 }
